@@ -17,19 +17,15 @@ export class FormularioComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selector = [
-      'Venta', 'Compra'
-    ];
 
     this.myForm = this.fb.group({
-      tipo_trans: [this.selector, Validators.required],
+      tipo_trans: ['', Validators.required],
       nome_producto: ['', Validators.required],
       valor: ['', Validators.required],
     });
   }
   async saveData() {
     this.mainService.addList(this.myForm.value);
-    console.log(this.myForm.value);
     return false;
     }
 

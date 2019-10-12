@@ -15,7 +15,6 @@ export class ExtratoComponent implements OnInit {
 
   ngOnInit() {
     this.trans = this.mainService.getList();
-    console.log(this.trans);
   }
 
   deleteTrans(trans: Transacoes) {
@@ -25,6 +24,17 @@ export class ExtratoComponent implements OnInit {
     }
   }
   getTotalCost() {
-    return this.trans.map(t => t.valor).reduce((acc, value) => acc + value, 0);
+    if ( localStorage.getItem('trans') !== 'undefined' && localStorage.getItem('trans') !== null ) {
+      const trans = localStorage.getItem('trans');
+      const jsonTrans = JSON.parse(trans);
+      let totalTrans = 0;
+      jsonTrans.forEach(element => {
+        totalTrans = totalTrans + Number(element.valor);
+      });
+
+      return totalTrans;
+    }
+    return 0;
+
   }
 }

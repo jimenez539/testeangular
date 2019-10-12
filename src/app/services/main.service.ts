@@ -10,10 +10,13 @@ export class MainService {
   constructor() {}
 
    getList() {
-    if (localStorage.getItem('trans') === null) {
-      return this.transacoes;
-    } else {
+    // if (localStorage.getItem('trans') === null) {
+
+    if ( localStorage.getItem('trans') !== 'undefined' && localStorage.getItem('trans') !== null ) {
       this.transacoes = JSON.parse(localStorage.getItem('trans'));
+      return this.transacoes;
+
+    } else {
       return this.transacoes;
     }
    }

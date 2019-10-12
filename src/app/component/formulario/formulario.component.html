@@ -3,9 +3,8 @@
     <mat-form-field  class="example-full-width">
       <mat-label>Tipo de transaçao</mat-label>
       <mat-select formControlName="tipo_trans">
-        <mat-option *ngFor="let item of selector" [value]="item">
-          {{ item }}
-        </mat-option>
+        <mat-option value="venta">Venta</mat-option>
+        <mat-option value="compra">Compra</mat-option>
       </mat-select>
     </mat-form-field>
 

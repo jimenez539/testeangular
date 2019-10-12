@@ -22,7 +22,7 @@ export class MainService {
    }
 
    addList(transacoes: Transacoes) {
-    this.transacoes.push(transacoes);
+    //this.transacoes.push(transacoes);
     let trans: Transacoes[] = [];
     if (localStorage.getItem('trans') === null) {
       trans.push(transacoes);

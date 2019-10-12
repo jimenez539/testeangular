@@ -7,9 +7,7 @@ import { Transacoes } from '../models/Transacoes';
 export class MainService {
   transacoes: Transacoes[];
 
-  constructor() {
-    this.transacoes = [];
-   }
+  constructor() {}
 
    getList() {
     if (localStorage.getItem('trans') === null) {
@@ -36,7 +34,7 @@ export class MainService {
 
    deleteItem(transacoes: Transacoes) {
     for (let i = 0; i < this.transacoes.length; i++) {
-      if (transacoes == this.transacoes[i]) {
+      if (transacoes === this.transacoes[i]) {
         this.transacoes.splice(i, 1);
         localStorage.setItem('trans', JSON.stringify(this.transacoes));
       }

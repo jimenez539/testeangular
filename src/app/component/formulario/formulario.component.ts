@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MainService } from '../../services/main.service';
-import { Transacoes } from 'src/app/models/Transacoes';
+
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario',
@@ -10,28 +11,27 @@ import { Transacoes } from 'src/app/models/Transacoes';
 
 export class FormularioComponent implements OnInit {
 
-  selector: Transacoes[] = [
-    {tipo_trans: 'Venta'},
-    {tipo_trans: 'Compra'}
-  ];
-
-  constructor(public mainService: MainService) {
+  myForm: FormGroup;
+  selector = [];
+  constructor(private fb: FormBuilder, public mainService: MainService) {
   }
 
   ngOnInit() {
+    this.selector = [
+      'Venta', 'Compra'
+    ];
+
+    this.myForm = this.fb.group({
+      tipo_trans: [this.selector, Validators.required],
+      nome_producto: ['', Validators.required],
+      valor: ['', Validators.required],
+    });
   }
-  saveData(newNome: HTMLInputElement, newValor: HTMLInputElement, newSelect: HTMLSelectElement) {
-      newSelect = JSON.parse(JSON.stringify(this.selector));
-      console.log(newNome.value, newValor.value, newSelect.value),
-      this.mainService.addList ({
-        tipo_trans: JSON.stringify(newSelect.value),
-        nome_producto: JSON.stringify(newNome.value),
-        valor: JSON.parse(newValor.value),
-      });
-      newNome.value = '';
-      newValor.value = '';
-      newNome.focus();
-      return false;
+  async saveData() {
+    this.mainService.addList(this.myForm.value);
+    console.log(this.myForm.value);
+    return false;
     }
+
   }
 

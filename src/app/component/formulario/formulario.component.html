@@ -1,22 +1,22 @@
-  <form (submit)="saveData(newNome, newValor, newSelect)">
+  <form [formGroup]="myForm" (ngSubmit)="saveData()">
 
     <mat-form-field  class="example-full-width">
       <mat-label>Tipo de transaçao</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let item of selector" [value]="item.tipo_trans" #newSelect>
-          {{ item.tipo_trans }}
+      <mat-select formControlName="tipo_trans">
+        <mat-option *ngFor="let item of selector" [value]="item">
+          {{ item }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Nome da mercadoria" #newNome>
+      <input matInput placeholder="Nome da mercadoria" formControlName="nome_producto">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Valor" #newValor>
+      <input matInput placeholder="Valor" formControlName="valor">
     </mat-form-field>
     
-    <button  mat-raised-button color="primary" type="submit">Adicionar transaçao</button>
- 
+    <button  mat-raised-button color="primary" [disabled]="myForm.invalid" type="submit">Adicionar transaçao</button><br>
   </form>
+
